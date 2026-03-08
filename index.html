@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Ollama Chat</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="hero-panel">
+        <p class="eyebrow">LOCAL AI CONSOLE</p>
+        <h1>和本地 Ollama 直接聊天</h1>
+        <p class="hero-copy">
+          这个页面默认连接你本机的 Ollama，并使用 <code>qwen3.5:9b</code>
+          模型。适合快速确认模型是否正常运行，也方便日常本地对话。
+        </p>
+
+        <div class="status-card">
+          <span class="status-dot" id="statusDot"></span>
+          <div>
+            <p class="status-title">连接状态</p>
+            <p class="status-text" id="statusText">正在检查 Ollama...</p>
+          </div>
+        </div>
+
+        <div class="tips-card">
+          <p>默认地址：<code>http://127.0.0.1:11434</code></p>
+          <p>默认模型：<code>qwen3.5:9b</code></p>
+          <p>如果回复里包含 <code>&lt;think&gt;</code> 内容，页面会自动折叠显示思考过程。</p>
+          <p>关闭本地网页服务时，运行同目录下的 <code>stop-chat.bat</code> 即可。</p>
+        </div>
+      </aside>
+
+      <main class="chat-panel">
+        <section class="toolbar">
+          <label>
+            Ollama 地址
+            <input id="baseUrlInput" type="text" value="http://127.0.0.1:11434" />
+          </label>
+          <label>
+            模型
+            <input id="modelInput" type="text" value="qwen3.5:9b" />
+          </label>
+          <button id="checkButton" class="secondary-btn" type="button">检查连接</button>
+          <button id="clearButton" class="ghost-btn" type="button">清空对话</button>
+        </section>
+
+        <section class="messages" id="messages">
+          <article class="message assistant">
+            <div class="message-role">Assistant</div>
+            <div class="message-body">
+              <div class="message-answer">你好，我已经准备好了。启动 Ollama 后，输入消息就可以和本地模型对话。</div>
+            </div>
+          </article>
+        </section>
+
+        <form class="composer" id="chatForm">
+          <label class="composer-label" for="promptInput">输入你的问题</label>
+          <textarea
+            id="promptInput"
+            rows="4"
+            placeholder="比如：帮我写一个 PowerShell 脚本，监控某个端口是否被占用"
+          ></textarea>
+          <div class="composer-actions">
+            <p class="hint" id="hintText">Shift + Enter 换行，Enter 发送</p>
+            <button id="sendButton" type="submit">发送</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
